@@ -21,6 +21,9 @@
     "dir": "auto",
     "lang": "en-US",
     "name": "ERP System",
+    "prefer_related_applications": false,
+    "display_override": ["window-controls-overlay"],
+    "handle_links": "preferred",
     "short_name": "ERP Pro",
     "description": "ERP system with Attendance and Feedback modules",
     "categories": [
@@ -28,6 +31,5 @@
         "productivity",
         "enterprise"
       ],
-      "related_applications": [],
-      "prefer_related_applications": false
+      "related_applications": []
     }
