@@ -20,11 +20,12 @@ export function Header({ title, showBackButton = false, user }) {
 
   const handleLogout = () => {
     logout()
-    router.push('/login')
+  
+    router.replace('/login') 
   }
 
   return (
-    <header className="flex items-center justify-between p-4 bg-primary text-primary-foreground">
+    <header className="flex items-center justify-between p-2 bg-primary text-primary-foreground">
       <div className="flex items-center">
         {showBackButton && (
           <Button variant="ghost" size="icon" onClick={() => router.back()}>
@@ -41,8 +42,8 @@ export function Header({ title, showBackButton = false, user }) {
               <AvatarImage
                 src={user.institute?.name ? `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}` : '/placeholder.svg'}
                 alt={user.name || 'User'}
-                width={32}
-                height={32}
+                width={30}
+                height={30}
                 className="rounded-full"
               />
                <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
