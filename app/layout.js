@@ -1,10 +1,9 @@
-"use client"
 import { Geist, Azeret_Mono as Geist_Mono } from 'next/font/google';
 import "./globals.css";
-import { useState, useEffect } from 'react'
-import { AuthProvider, useAuth } from "@/lib/auth-context";
+import { AuthProvider } from "@/lib/auth-context";
 import { Toaster } from "@/components/ui/sonner";
 import RootLayoutContent from '@/components/RootLayoutComponent';
+import { metadata } from './metadata';
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -16,20 +15,14 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
 });
 
-export default function RootLayout({ children }) {
-  const [isLoading, setIsLoading] = useState(true)
+export { metadata };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 2000)
-  }, [])
-
+export default function RootLayout({ children } ) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased font-sans">
         <AuthProvider>
-          <RootLayoutContent isLoading={isLoading} setIsLoading={setIsLoading}>
+          <RootLayoutContent>
             {children}
           </RootLayoutContent>
         </AuthProvider>
@@ -38,3 +31,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+

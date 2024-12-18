@@ -1,17 +1,26 @@
+"use client"
 import { useAuth } from "@/lib/auth-context";
+import { useEffect, useState } from "react";
 
 const { usePathname } = require("next/navigation");
 const { Header } = require("./Header");
 const { SplashScreen } = require("./splash-screen");
 
 export default function RootLayoutContent({ 
-    children, 
-    isLoading, 
-    setIsLoading 
+    children
   }) {
     const pathname = usePathname()
-    const { user } = useAuth();
   
+    const [isLoading, setIsLoading] = useState(true)
+    const { user } = useAuth()
+  
+    useEffect(() => {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 2000)
+    }, [])
+  
+   
     const getHeaderTitle = () => {
       if (pathname === '/login') return 'Login'
       
