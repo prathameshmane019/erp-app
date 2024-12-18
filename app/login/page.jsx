@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { useAuth } from '@/lib/auth-context'
@@ -26,7 +26,14 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const { login } = useAuth()
   const router = useRouter()
+const {user} = useAuth()
 
+useEffect(()=>{
+  if(user){
+    router.push(`/${user?.role}`)
+    }
+
+},[user])
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
