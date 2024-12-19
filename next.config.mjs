@@ -7,7 +7,25 @@ const nextConfig = {   // Enable React strict mode for improved error handling
     // swcMinify: true,            // Enable SWC minification for improved performance
     compiler: {
         removeConsole: process.env.NODE_ENV !== "development"     // Remove console.log in production
-    }
+    },
+    async headers() {
+      return [
+          {
+              source: '/.well-known/assetlinks.json',
+              headers: [
+                  {
+                      key: 'Content-Type',
+                      value: 'application/json',
+                  },
+                  {
+                      // Ensure no caching for assetlinks.json
+                      key: 'Cache-Control',
+                      value: 'no-cache, no-store, must-revalidate',
+                  },
+              ],
+          },
+      ];
+  },
 };
 
 export default withPWA({
@@ -107,6 +125,17 @@ export default withPWA({
           },
           networkTimeoutSeconds: 10
         }
-      }
+      },
+      {
+        urlPattern: /\.well-known\/assetlinks\.json$/i,
+        handler: 'NetworkFirst',
+        options: {
+            cacheName: 'assetlinks',
+            expiration: {
+                maxEntries: 1,
+                maxAgeSeconds: 24 * 60 * 60 // 24 hours
+            }
+        }
+    }
     ]
   })(nextConfig);

@@ -18,5 +18,11 @@ export const metadata = {
       title: 'ERP System',
       description: 'Comprehensive Enterprise Resource Planning Solution',
       images: ['/icon512_maskable.png']
+    },
+    other: {
+      'mobile-web-app-capable': 'yes',
+      'apple-mobile-web-app-capable': 'yes',
+      'application-name': 'ERP System',
+      'apple-mobile-web-app-title': 'ERP System',
     }
   };
